@@ -1,0 +1,27 @@
+syntax = "proto3";
+package pb;
+
+option go_package = "github.com/msadministrator/golang-grpc-example/internal/pb";
+
+// Example service to enrich indicators
+service ExampleEnrichment {
+  // ExampleEnrichment receives a batch of indicators and returns a batch of enriched indicators
+  rpc ExampleEnrich (ExampleEnrichmentRequest) returns (ExampleEnrichmentResponse);
+}
+
+// An enriched user object
+message ExampleEnrichedIndicator {
+    string type = 1;
+    string indicator = 2;
+    bool malicious = 3;
+}
+
+// A batch / list of IPs to enrich
+message ExampleEnrichmentRequest {
+  repeated string ips = 1;
+}
+
+// A batch / list of enriched IP objects
+message ExampleEnrichmentResponse {
+  repeated ExampleEnrichedIndicator objects = 1;
+}
